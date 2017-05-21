@@ -812,7 +812,7 @@ def _create_function_bindings():
     }
 
 
-    for name, (restype, errcheck, outparam, argtypes) in specs.items():
+    for name, (restype, errcheck, outparam, argtypes) in list(specs.items()):
         prototype = _CFunc(restype, *argtypes)
 
         paramflags = [1] * len(argtypes)
@@ -1952,7 +1952,7 @@ class TXTRecord(object):
         self._names = []
         self._items = {}
 
-        for name, value in items.items():
+        for name, value in list(items.items()):
             self[name] = value
 
     def __contains__(self, name):
@@ -1968,7 +1968,7 @@ class TXTRecord(object):
         'Return the number of name/value pairs'
         return len(self._names)
 
-    def __nonzero__(self):
+    def __bool__(self):
         'Return False if the record is empty, True otherwise'
         return bool(self._items)
 
